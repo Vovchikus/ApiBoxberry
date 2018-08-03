@@ -1,0 +1,9 @@
+{
+    "name": "boxberryapi/sdk",
+    "version": "1.0.1",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": { "Boxberry\\": "" }
+    }
+}
