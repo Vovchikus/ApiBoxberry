@@ -31,7 +31,7 @@ class Client
     /**
      * @var string
      */
-    protected $key = null;
+    protected $key;
 
     /**
      * @var string
@@ -39,40 +39,15 @@ class Client
     protected $api_url;
 
     /**
-     * @var string
-     */
-    protected $production_url = 'https://api.boxberry.de/json.php';
-
-    /**
-     * @var string
-     */
-    protected $debug_url = 'http://test.api.boxberry.de/json.php';
-
-    /**
      * @var bool
      */
     protected $debug_mode_enabled;
 
-    public function __construct()
+    public function __construct($api_url, $api_key, $debug_mode_enabled = false)
     {
-        $this->api_url = $this->production_url;
-    }
-
-    public function enableDebugMode()
-    {
-        $this->api_url = $this->debug_url;
-        $this->debug_mode_enabled = true;
-    }
-
-    public function disableDebugMode()
-    {
-        $this->api_url = $this->production_url;
-        $this->debug_mode_enabled = false;
-    }
-
-    public function isDebugModeEnabled()
-    {
-        return $this->debug_mode_enabled;
+        $this->api_url = $api_url;
+        $this->debug_mode_enabled = $debug_mode_enabled;
+        $this->key = $api_key;
     }
 
     /**
@@ -104,15 +79,10 @@ class Client
      */
     public function setApiUrl($api_url)
     {
-        if ($this->isDebugModeEnabled()) {
-            $this->debug_url = $api_url;
-        } else {
-            $this->production_url = $api_url;
-        }
         $this->api_url = $api_url;
     }
-	
-	/**
+
+    /**
      * @return Requests\CourierListCitiesRequest
      */
     public static function getCourierListCities()
@@ -127,7 +97,7 @@ class Client
     {
         return new Requests\DeliveryCostsRequest();
     }
-	
+
     /**
      * @return Requests\ListCitiesRequest
      */
@@ -273,16 +243,16 @@ class Client
     {
         return new Requests\PointsForParcelsRequest();
     }
-	
-	/**
+
+    /**
      * @return Requests\GetKeyIntegrationRequest
      */
     public static function getKeyIntegration()
     {
         return new Requests\GetKeyIntegrationRequest();
     }
-	
-	/**
+
+    /**
      * @return Requests\WidgetSettingsRequest
      */
     public static function getWidgetSettings()
@@ -303,13 +273,13 @@ class Client
     public function execute(Request $request)
     {
 
-		if ($this->api_url === null || $this->key === null) {
+        if ($this->api_url === null || $this->key === null) {
             throw new BadSettingsException('Проверьте секретный ключ и адрес апи');
         }
         if ($request->checkRequiredFields() === false) {
             throw new Requests\Exceptions\RequiredFieldsNullException('Не все обязательные параметры заполнены');
         }
-		
+
         $serializer = new Serializer();
 
         if (property_exists($request, 'method') && $request->method == 'POST') {
@@ -327,9 +297,9 @@ class Client
                 'method' => $request->getClassName(),
                 'token'  => $this->key
             );
-			if ($data['method']=='DeliveryCosts' || $data['method']=='WidgetSettings'){
-				HTTP::setCacheTimeLife(0);
-			}
+            if ($data['method']=='DeliveryCosts' || $data['method']=='WidgetSettings'){
+                HTTP::setCacheTimeLife(0);
+            }
             $data = array_merge($data, $serializer->toArray($request));
             $answer = HTTP::post($this->api_url, $data)->getAnswer();
 
