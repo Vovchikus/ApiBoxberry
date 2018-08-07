@@ -47,6 +47,7 @@ class DeliveryCosts extends AbstractModel
      * @var string
      */
     protected $ordersum = null;
+
     /**
      * DeliveryCosts constructor.
      * @param array $data
@@ -54,14 +55,16 @@ class DeliveryCosts extends AbstractModel
      */
     public function __construct(array $data)
     {
-        if ((float)$data['price_base'] <=0 ) {
+        if ((float)$data['price_base'] <= 0) {
             throw new BadResponseException('Доставка до выбранного места невозможна');
         }
         $this->price = $data['price'];
         $this->price_base = $data['price_base'];
         $this->price_service = $data['price_service'];
         $this->delivery_period = $data['delivery_period'];
-        $this->ordersum = $data['ordersum'];
+        if (isset($data['ordersum'])) {
+            $this->ordersum = $data['ordersum'];
+        }
         parent::__construct();
     }
 
@@ -111,7 +114,7 @@ class DeliveryCosts extends AbstractModel
      */
     public function setPriceBase($price_base)
     {
-        if ((float)$price_base <=0 ) {
+        if ((float)$price_base <= 0) {
             throw new BadResponseException('Доставка до выбранного места невозможна');
         }
         $this->price_base = $price_base;
@@ -132,6 +135,7 @@ class DeliveryCosts extends AbstractModel
     {
         $this->delivery_period = $delivery_period;
     }
+
     /**
      * @return string
      */
