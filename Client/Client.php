@@ -43,11 +43,10 @@ class Client
      */
     protected $debug_mode_enabled;
 
-    public function __construct($api_url, $api_key, $debug_mode_enabled = false)
+    public function __construct($api_url, $debug_mode_enabled = false)
     {
         $this->api_url = $api_url;
         $this->debug_mode_enabled = $debug_mode_enabled;
-        $this->key = $api_key;
     }
 
     /**
