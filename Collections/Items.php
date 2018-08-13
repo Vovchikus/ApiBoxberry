@@ -56,4 +56,12 @@ class Items extends Collection
             $this->_container[$offset] = $value;
         }
     }
+
+    /**
+     * @param Item $item
+     */
+    public function addItem(Item $item)
+    {
+        $this->_container[] = $item;
+    }
 }

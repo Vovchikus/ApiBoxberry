@@ -330,10 +330,7 @@ class DeliveryCostsRequest extends Request
      * @return bool
      */
     function checkRequiredFields()
-    {      
-		if ($this->getWeight() === null || ($this->getTarget() === null && $this->getZip() === null)) {
-            return false;
-        }
+    {
         return true;
     }
 }

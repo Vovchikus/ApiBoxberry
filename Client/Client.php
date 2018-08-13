@@ -320,6 +320,11 @@ class Client
         }
     }
 
+    public function isDebugModeEnabled()
+    {
+        return $this->debug_mode_enabled;
+    }
+
     /**
      * Проверяет принадлежит ли возвращаемый тип классу или типу bool, иначе возвращает false
      * @param $type

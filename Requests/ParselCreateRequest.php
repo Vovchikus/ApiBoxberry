@@ -63,9 +63,6 @@ class ParselCreateRequest extends Request
      */
     function checkRequiredFields()
     {
-        if ($this->getParsel() === null) {
-            return false;
-        }
         return true;
     }
 }
