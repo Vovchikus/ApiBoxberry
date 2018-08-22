@@ -131,7 +131,6 @@ class HTTP
             } else {
                 throw new HttpException('Can not create connection to ' . $api_url . ' with args ' . $args, 404);
             }
-            self::set_cache($hashRequest,$out);
 
         }
 		return new Response($answer);
