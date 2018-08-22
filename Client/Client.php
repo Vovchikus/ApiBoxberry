@@ -259,6 +259,14 @@ class Client
         return new Requests\WidgetSettingsRequest();
     }
 
+    /**
+     * @return Requests\CreateIntakeRequest
+     */
+    public static function getCreateIntake()
+    {
+        return new Requests\CreateIntakeRequest();
+    }
+
 
     /**
      * Проверяет правильно ли заполнен request, подготавливает запрос для отправки.
