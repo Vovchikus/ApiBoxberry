@@ -29,6 +29,8 @@ class ParselCheckResponse
      */
     protected $label = null;
 
+    protected $id = null;
+
     /**
      * ParselCheckResponse constructor.
      * @param $data
@@ -38,6 +40,11 @@ class ParselCheckResponse
     {
         if (isset($data['label'])) {
             $this->label = $data['label'];
+        } else {
+            throw new BadResponseException;
+        }
+        if (isset($data['id'])) {
+            $this->id = $data['id'];
         } else {
             throw new BadResponseException;
         }
