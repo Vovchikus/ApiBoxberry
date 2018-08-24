@@ -1,6 +1,6 @@
 {
     "name": "boxberryapi/sdk",
-    "version": "1.0.14",
+    "version": "1.0.20",
     "type": "library",
     "license": "MIT",
     "autoload": {
