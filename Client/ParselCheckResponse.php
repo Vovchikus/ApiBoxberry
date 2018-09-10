@@ -38,6 +38,9 @@ class ParselCheckResponse
      */
     public function __construct($data)
     {
+        if (is_array($data)) {
+            $data = reset($data);
+        }
         if (isset($data['label'])) {
             $this->label = $data['label'];
         }
