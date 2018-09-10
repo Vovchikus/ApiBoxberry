@@ -38,7 +38,7 @@ class ParselCheckResponse
      */
     public function __construct($data)
     {
-        if (is_array($data)) {
+        if (isset($data[0])) {
             $data = reset($data);
         }
         if (isset($data['label'])) {
