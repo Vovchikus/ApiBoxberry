@@ -42,13 +42,9 @@ class ParselCreateResponse
     {
         if (isset($data['label'])) {
             $this->label = $data['label'];
-        } else {
-            throw new BadResponseException;
         }
         if (isset($data['track'])) {
             $this->track = $data['track'];
-        } else {
-            throw new BadResponseException;
         }
     }
 
