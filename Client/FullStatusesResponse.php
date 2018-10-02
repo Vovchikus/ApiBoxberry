@@ -48,18 +48,6 @@ class FullStatusesResponse
     {
         if (isset($data['statuses']) && is_array($data['statuses'])) {
             $this->statuses = new ListStatusesCollection($data['statuses']);
-        } else {
-            throw new BadResponseException;
-        }
-        if (isset($data['products']) && is_array($data['products'])) {
-            $this->products = new ListProductsCollection($data['products']);
-        } else {
-            throw new BadResponseException;
-        }
-        if (isset($data['PD'])) {
-            $this->PD = $data['PD'];
-        } else {
-            throw new BadResponseException;
         }
     }
 
@@ -77,38 +65,6 @@ class FullStatusesResponse
     public function setStatuses(ListStatusesCollection $statuses)
     {
         $this->statuses = $statuses;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPD()
-    {
-        return $this->PD;
-    }
-
-    /**
-     * @param string $PD
-     */
-    public function setPD($PD)
-    {
-        $this->PD = $PD;
-    }
-
-    /**
-     * @return ListProductsCollection
-     */
-    public function getProducts()
-    {
-        return $this->products;
-    }
-
-    /**
-     * @param ListProductsCollection $products
-     */
-    public function setProducts(ListProductsCollection $products)
-    {
-        $this->products = $products;
     }
 
 }
